@@ -20,24 +20,24 @@ import com.sa.base.ServerManager;
 import com.sa.net.Packet;
 import com.sa.net.PacketType;
 
-public class ServerRequestbRoom extends Packet {
-	public ServerRequestbRoom(){}
+public class ServerRequestbOne extends Packet {
+	public ServerRequestbOne(){}
 	
 	@Override
 	public PacketType getPacketType() {
-		return PacketType.ServerRequestbRoom;
+		return PacketType.ServerRequestbOne;
 	}
 
 	@Override
 	public void execPacket() {
-		//System.out.println("SEND ServerRequestbRoom " + this.getFromUserId() + "[" + this.getOption(1) + "]");
+		//System.out.println("SEND ServerRequestbOne " + this.getFromUserId() + "[" + this.getOption(1) + "]");
 		this.setFromUserId("147081");
 		this.setRoomId("22421");
-		this.setTransactionId(15726);
+		this.setTransactionId(15724);
 		this.setStatus(0);
-		//this.setRemoteIp("192.168.21.115");
+		this.setToUserId("147080");
 		TreeMap<Integer,Object> treeMap = new TreeMap<>();
-		treeMap.put(1, "{'command':'open','content':'我是一班22421第二147081，我在ServerRequestbRoom','domain':'i-clicker','domain_id':37}");
+		treeMap.put(1, "{'command':'open','content':'我是一班22421第二147081，我给一班第一发了ServerRequestbOne','domain':'i-clicker','domain_id':37}");
 		this.setOptions(treeMap);
 		ServerManager.INSTANCE.sendServerRequest(this);
 	}
