@@ -274,7 +274,7 @@ public class StartClient {
 			serverRequestbShareUpd.execPacket();
 			TreeMap<Integer,Object> updateShareMap = new TreeMap<>();
 			updateShareMap.put(1, "starcount");
-			updateShareMap.put(2, "{'20147076':'1','20147078':'0','20147079':'0','20147080':'80','20147081':'81','20147082':'82'}");
+			updateShareMap.put(2, "147081upd");
 			updateShareMap.put(3, "1");
 			updateShareMap.put(4, "upd");
 			serverRequestbShareUpd.setOptions(updateShareMap);
@@ -286,7 +286,7 @@ public class StartClient {
 			serverRequestbShareUpd3.setTransactionId(15724);
 			serverRequestbShareUpd3.setStatus(0);
 			TreeMap<Integer,Object> updateShareMap3 = new TreeMap<>();
-			updateShareMap3.put(1, "starcount");
+			updateShareMap3.put(1, "starlist");
 			updateShareMap3.put(2, "{'20147080':8}");
 			updateShareMap3.put(3, "n");
 			updateShareMap3.put(4, "upd");
@@ -314,7 +314,7 @@ public class StartClient {
 			serverRequestbShareGet4.setStatus(0);
 			
 			TreeMap<Integer,Object> getShareMap4 = new TreeMap<>();
-			getShareMap4.put(1, "starcount");
+			getShareMap4.put(1, "starlist");
 			getShareMap4.put(2, "n");
 			serverRequestbShareGet4.setOptions(getShareMap4);
 			
@@ -340,7 +340,7 @@ public class StartClient {
 			serverRequestbShareUpd1.setTransactionId(15724);
 			serverRequestbShareUpd1.setStatus(0);
 			TreeMap<Integer,Object> updateShareMap1 = new TreeMap<>();
-			updateShareMap1.put(1, "starcount");
+			updateShareMap1.put(1, "starlist");
 			updateShareMap1.put(2, "shareUpdIndex");
 			//updateShareMap1.put(2, "{'20147076':'1','20147078':'0','20147079':'0','20147080':'80','20147081':'81','20147082':'82'}");
 			updateShareMap1.put(3, "n");
@@ -357,7 +357,7 @@ public class StartClient {
 			serverRequestbShareUpd2.setTransactionId(15724);
 			serverRequestbShareUpd2.setStatus(0);
 			TreeMap<Integer,Object> updateShareMap2 = new TreeMap<>();
-			updateShareMap2.put(1, "starcount");
+			updateShareMap2.put(1, "starlist");
 			updateShareMap2.put(8, "{'20147081':81}");
 			updateShareMap2.put(3, "n");
 			updateShareMap2.put(4, "upd.value");
@@ -374,7 +374,7 @@ public class StartClient {
 			serverRequestbShareUpdSelf2.setStatus(0);
 			TreeMap<Integer,Object> updateShareSelf2 = new TreeMap<>();
 			updateShareSelf2.put(1, "starcount");
-			updateShareSelf2.put(2, "{'20147076':'1','20147078':'0','20147079':'0','20147080':'80','20147081':'81','20147082':'82'}");
+			updateShareSelf2.put(2, "147801upd");
 			updateShareSelf2.put(3, "1");
 			updateShareSelf2.put(4, "upd");
 			serverRequestbShareUpdSelf2.setOptions(updateShareSelf2);
@@ -388,7 +388,7 @@ public class StartClient {
 			serverRequestbShareUpdSelf3.setTransactionId(15724);
 			serverRequestbShareUpdSelf3.setStatus(0);
 			TreeMap<Integer,Object> updateShareSelf3 = new TreeMap<>();
-			updateShareSelf3.put(1, "starcount");
+			updateShareSelf3.put(1, "starlist");
 			updateShareSelf3.put(2, "{'20147081':81}");
 			updateShareSelf3.put(3, "n");
 			updateShareSelf3.put(4, "upd");
@@ -403,7 +403,7 @@ public class StartClient {
 			serverRequestbShareUpdSelf.setTransactionId(15724);
 			serverRequestbShareUpdSelf.setStatus(0);
 			TreeMap<Integer,Object> updateShareMapSelf = new TreeMap<>();
-			updateShareMapSelf.put(1, "starcount");
+			updateShareMapSelf.put(1, "starlist");
 			updateShareMapSelf.put(2, "shareUpdSelfIndex");
 			//updateShareMap1.put(2, "{'20147076':'1','20147078':'0','20147079':'0','20147080':'80','20147081':'81','20147082':'82'}");
 			updateShareMapSelf.put(3, "n");
@@ -420,7 +420,7 @@ public class StartClient {
 			serverRequestbShareUpdSelf1.setTransactionId(15724);
 			serverRequestbShareUpdSelf1.setStatus(0);
 			TreeMap<Integer,Object> updateShareMapSelf1 = new TreeMap<>();
-			updateShareMapSelf1.put(1, "starcount");
+			updateShareMapSelf1.put(1, "starlist");
 			updateShareMapSelf1.put(8, "{'20147081':81}");
 			updateShareMapSelf1.put(3, "n");
 			updateShareMapSelf1.put(4, "upd.value");
