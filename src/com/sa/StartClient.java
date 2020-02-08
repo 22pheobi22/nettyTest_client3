@@ -234,6 +234,7 @@ public class StartClient {
 			serverRequestcApplyAuth.setFromUserId("147081");
 			serverRequestcApplyAuth.setRoomId("22421");
 			serverRequestcApplyAuth.setTransactionId(15724);
+			serverRequestcApplyAuth.setToUserId("T366");
 			serverRequestcApplyAuth.setStatus(0);
 			TreeMap<Integer,Object> applyAuthMap = new TreeMap<>();
 			applyAuthMap.put(1, "呃。。申请权限");
@@ -287,7 +288,7 @@ public class StartClient {
 			serverRequestbShareUpd3.setStatus(0);
 			TreeMap<Integer,Object> updateShareMap3 = new TreeMap<>();
 			updateShareMap3.put(1, "starlist");
-			updateShareMap3.put(2, "{'20147080':8}");
+			updateShareMap3.put(2, "{'20147081':81}");
 			updateShareMap3.put(3, "n");
 			updateShareMap3.put(4, "upd");
 			serverRequestbShareUpd3.setOptions(updateShareMap3);
