@@ -20,6 +20,7 @@ public class ServerLogin extends Packet{
 
 	@Override
 	public void execPacket() {
+		System.out.println(this.toString());
 		ServerManager.INSTANCE.sendServerRequest(this);
 	}
 
