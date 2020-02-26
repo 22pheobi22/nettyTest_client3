@@ -32,27 +32,100 @@ import com.sa.service.server.ServerRequestcRoomRemove;
 import com.sa.service.server.ServerRequestcShareRemove;
 import com.sa.transport.ChatClient;
 import com.sa.transport.ClientConfigs;
-
 public class StartClient {
-	private static int count = 100;
-	/*private static List<String> roomIds = Arrays.asList("房间A", "房间B", "房间C"
-			,"房间D", "房间E", "房间F"
-			,"房间G", "房间H", "房间I"
-			,"房间J"
-			);*/
-	
+	private static int count = 50;
 	private static List<String> roomIds = Arrays.asList("房间00","房间01","房间02","房间03","房间04","房间05","房间06","房间07","房间08","房间09",
 			"房间10","房间11","房间12","房间13","房间14","房间15","房间16","房间17","房间18","房间19",
 			"房间20","房间21","房间22","房间23","房间24","房间25","房间26","房间27","房间28","房间29",
 			"房间30","房间31","房间32","房间33","房间34","房间35","房间36","房间37","房间38","房间39",
-			"房间40","房间41","房间42","房间43","房间44","房间45","房间46","房间47","房间48","房间49",
-			"房间50","房间51","房间52","房间53","房间54","房间55","房间56","房间57","房间58","房间59",
-			"房间60","房间61","房间62","房间63","房间64","房间65","房间66","房间67","房间68","房间69",
-			"房间70","房间71","房间72","房间73","房间74","房间75","房间76","房间77","房间78","房间79",
-			"房间80","房间81","房间82","房间83","房间84","房间85","房间86","房间87","房间88","房间89",
-			"房间90","房间91","房间92","房间93","房间94","房间95","房间96","房间97","房间98","房间99");
+			"房间40","房间41","房间42","房间43","房间44","房间45","房间46","房间47","房间48","房间49");
 	private static Map<String,String> map = new HashMap<>();
 
+	private static List<String> menuList = Arrays.asList(
+			"1.登录绑定;",
+			"10.更新共享--添加单个值;"
+	);
+
+	public static void menu() throws Exception {
+		Scanner scan = new Scanner(System.in);
+
+		while(true) {
+			System.out.println("===============[请选择操作项目]================");
+			for (String menu : menuList) {
+				System.out.println(menu);
+			}
+			System.out.println("==========================================");
+
+//			System.out.print("请选择[1、2、3、4、5、6、7、8、9、10、11、0]? ");
+			System.out.println("请选择[1、3、9、0]? ");
+			String menu = scan.nextLine();
+
+			if ("0".equals(menu)) {
+				System.out.println("退出");
+				break;
+			} else {
+				functionProcessing(menu, scan);
+			}
+		}
+
+		scan.close();
+	}
+
+	private static void functionProcessing(String menu, Scanner scan) {
+		switch (menu) {
+		
+		case "1"://登录
+			for (Entry<String, String> str : map.entrySet()) {
+				new Thread(new ChatClient(ClientConfigs.REMOTE_SERVER_IP, ClientConfigs.REMOTE_SERVER_PORT, str.getKey(),str.getValue())).start();
+			}
+			break;
+		case "10": // 更新共享
+			for (Entry<String, String> str : map.entrySet()) {
+				
+				ServerRequestbShareUpd serverRequestbShareUpd = new ServerRequestbShareUpd();
+				serverRequestbShareUpd.setFromUserId(str.getValue());
+				serverRequestbShareUpd.setRoomId(str.getKey());
+				serverRequestbShareUpd.setTransactionId(15724);
+				serverRequestbShareUpd.setStatus(0);
+				TreeMap<Integer,Object> updateShareMap = new TreeMap<>();
+				updateShareMap.put(1, "starcount");
+				updateShareMap.put(2, str.getValue()+"{'20147076':'1','20147078':'0','20147079':'0','20147080':'80','20147081':'81','20147082':'82'}");
+				updateShareMap.put(3, "1");
+				updateShareMap.put(4, "upd");
+				serverRequestbShareUpd.setOptions(updateShareMap);
+				serverRequestbShareUpd.execPacket();
+			}
+			
+			break;	
+		default:
+			System.err.println("无此功能");
+			break;
+
+		}
+	}
+
+	public static void main(String[] args)  throws Exception {
+		//startChatClient();
+		for (int i=0; i<count; i++) {
+			String roomId = roomIds.get(i%roomIds.size());
+			Integer transactionId = (int) (1 + Math.random()*100000000);
+			String fromUserId = roomId + "-" + i+1 + "-" + System.currentTimeMillis() + "-" + transactionId;
+			map.put(roomId, fromUserId);
+			//new Thread(new ChatClient(ClientConfigs.REMOTE_SERVER_IP, ClientConfigs.REMOTE_SERVER_PORT, roomId, i+1,fromUserId,transactionId)).start();
+		}
+		menu();
+
+		//System.exit(0);
+	}
+}
+/*public class StartClient {
+	private static int count = 1;
+	private static List<String> roomIds = Arrays.asList("房间A", "房间B", "房间C"
+			,"房间D", "房间E", "房间F"
+			,"房间G", "房间H", "房间I"
+			,"房间J"
+			);
+	
 	private static List<String> menuList = Arrays.asList(
 			"1.登录绑定;",
 			"2.一对一消息;",
@@ -89,13 +162,13 @@ public class StartClient {
 			"0.退出测试;"
 	);
 
-	/*public static void startChatClient() {
+	public static void startChatClient() {
 		for (int i=0; i<count; i++) {
 			String roomId = roomIds.get(i%roomIds.size());
 
-			new Thread(new ChatClient(ClientConfigs.REMOTE_SERVER_IP, ClientConfigs.REMOTE_SERVER_PORT, roomId, i+1)).start();
+			//new Thread(new ChatClient(ClientConfigs.REMOTE_SERVER_IP, ClientConfigs.REMOTE_SERVER_PORT, roomId, i+1)).start();
 		}
-	}*/
+	}
 
 	public static void menu() throws Exception {
 		Scanner scan = new Scanner(System.in);
@@ -123,14 +196,10 @@ public class StartClient {
 	}
 
 	private static void functionProcessing(String menu, Scanner scan) {
-		//Map<String,String> map = new HashMap<>();
 		switch (menu) {
 		
 		case "1"://登录
-			for (Entry<String, String> str : map.entrySet()) {
-				new Thread(new ChatClient(ClientConfigs.REMOTE_SERVER_IP, ClientConfigs.REMOTE_SERVER_PORT, str.getKey(),str.getValue())).start();
-			}
-			//new Thread(new ChatClient(ClientConfigs.REMOTE_SERVER_IP, ClientConfigs.REMOTE_SERVER_PORT, "22421", 1)).start();
+			new Thread(new ChatClient(ClientConfigs.REMOTE_SERVER_IP, ClientConfigs.REMOTE_SERVER_PORT, "22421", "147081")).start();
 			break;
 		case "2": // 一对一
 			new ServerRequestbOne().execPacket();
@@ -286,23 +355,19 @@ public class StartClient {
 			serverRequestcShareRemove.execPacket();
 			break;
 		case "10": // 更新共享
-			for (Entry<String, String> str : map.entrySet()) {
-				
-				ServerRequestbShareUpd serverRequestbShareUpd = new ServerRequestbShareUpd();
-				serverRequestbShareUpd.setFromUserId(str.getValue());
-				serverRequestbShareUpd.setRoomId(str.getKey());
-				serverRequestbShareUpd.setTransactionId(15724);
-				serverRequestbShareUpd.setStatus(0);
-				//serverRequestbShareUpd.execPacket();
-				TreeMap<Integer,Object> updateShareMap = new TreeMap<>();
-				updateShareMap.put(1, "starcount");
-				updateShareMap.put(2, str.getValue()+"{'20147076':'1','20147078':'0','20147079':'0','20147080':'80','20147081':'81','20147082':'82'}");
-				updateShareMap.put(3, "1");
-				updateShareMap.put(4, "upd");
-				serverRequestbShareUpd.setOptions(updateShareMap);
-				serverRequestbShareUpd.execPacket();
-			}
-			
+			ServerRequestbShareUpd serverRequestbShareUpd = new ServerRequestbShareUpd();
+			serverRequestbShareUpd.setFromUserId("147080");
+			serverRequestbShareUpd.setRoomId("22421");
+			serverRequestbShareUpd.setTransactionId(15724);
+			serverRequestbShareUpd.setStatus(0);
+			TreeMap<Integer,Object> updateShareMap = new TreeMap<>();
+			updateShareMap.put(1, "starcount");
+			updateShareMap.put(2, "147080更新单个值");
+			updateShareMap.put(3, "1");
+			updateShareMap.put(4, "upd");
+			serverRequestbShareUpd.setOptions(updateShareMap);
+			serverRequestbShareUpd.execPacket();
+
 			break;	
 		case "10.1": // 更新共享--添加集合
 			ServerRequestbShareUpd serverRequestbShareUpd3 = new ServerRequestbShareUpd();
@@ -484,7 +549,7 @@ public class StartClient {
 		}
 	}
 
-	/** CASE 3 一对多【全房间】*/
+	*//** CASE 3 一对多【全房间】*//*
 	private static void serverRequestbRoom(Scanner scanner) {
 		System.out.println("请输入消息 : ");
 		String content = scanner.nextLine();
@@ -500,15 +565,10 @@ public class StartClient {
 
 	public static void main(String[] args)  throws Exception {
 		//startChatClient();
-		for (int i=0; i<count; i++) {
-			String roomId = roomIds.get(i%roomIds.size());
-			Integer transactionId = (int) (1 + Math.random()*100000000);
-			String fromUserId = roomId + "-" + i+1 + "-" + System.currentTimeMillis() + "-" + transactionId;
-			map.put(roomId, fromUserId);
-			//new Thread(new ChatClient(ClientConfigs.REMOTE_SERVER_IP, ClientConfigs.REMOTE_SERVER_PORT, roomId, i+1,fromUserId,transactionId)).start();
-		}
+		
 		menu();
 
-		//System.exit(0);
+		System.exit(0);
 	}
 }
+*/
