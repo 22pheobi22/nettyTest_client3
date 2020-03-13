@@ -5,7 +5,7 @@ public class ClientConfigs {
 
 	/**  服务器ip */
 	//public static String REMOTE_SERVER_IP = "192.168.21.32";
-	public static String REMOTE_SERVER_IP = "192.168.0.169";
+	public static String REMOTE_SERVER_IP = "192.168.40.214";
 	/**  服务器端口 */
 	public static int REMOTE_SERVER_PORT = 8180;//8080
 
